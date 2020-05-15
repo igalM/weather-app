@@ -1,0 +1,11 @@
+<div class="home-page" fxLayout="column">
+
+    <div class="search-component">
+        <search-component [query]="searchQuery$ | async" [searching]="loading$ | async" (search)="search($event)"></search-component>
+    </div>
+
+    <div *ngIf="currentWeather" class="featured-weather">
+        <home-parts-forecast-component [weather]="currentWeather"></home-parts-forecast-component>
+    </div>
+
+</div>

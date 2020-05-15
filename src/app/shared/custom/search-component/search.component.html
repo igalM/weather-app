@@ -1,0 +1,22 @@
+<div class="search-box" fxLayout="column">
+    <div class="input-container">
+        <mat-form-field floatLabel="never" class="autocomplete">
+            <input matInput name="query" placeholder="Tel Aviv" [(ngModel)]="query" [matAutocomplete]="auto"
+                (keyup)="checkIfValid($event.target.value)">
+            <mat-icon matPrefix>search</mat-icon>
+            <mat-spinner [class.show]="searching"></mat-spinner>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="checkIfValid($event.option.value)">
+                <mat-option *ngFor=" let option of filteredCities" [value]="option.name">
+                    {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+    <div *ngIf="showError" class="error-msg">
+        <p> Please enter only english characters :)</p>
+    </div>
+    <div class="button-container">
+        <button mat-raised-button color="primary" [disabled]="query == '' || showError" (click)="submit()"
+            class="submit-btn">Search</button>
+    </div>
+</div>

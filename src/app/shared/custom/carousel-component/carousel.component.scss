@@ -1,0 +1,45 @@
+ngu-carousel.forecasts {
+  .item {
+    mat-card {
+      mat-card-content {
+        .day {
+          align-items: center;
+          .degrees {
+            .min {
+              margin: 3px;
+              color: #aaa9a9;
+              p {
+                margin: 0;
+              }
+            }
+            .max {
+              margin: 3px;
+              color: #646363;
+              p {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .leftRs {
+    position: absolute;
+    left: -6px;
+    top: 40%;
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    text-align: left;
+  }
+  .rightRs {
+    position: absolute;
+    right: -6px;
+    top: 40%;
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    text-align: right;
+  }
+}

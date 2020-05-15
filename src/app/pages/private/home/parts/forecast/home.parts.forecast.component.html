@@ -1,0 +1,52 @@
+<div *ngIf="weather" class="weather">
+
+    <div class="top-row" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="left-side" fxLayout="row">
+            <div class="day-icon">
+                <img [src]="weather.forcasts[0].dayForcastIcon">
+            </div>
+            <div class="city-name" fxLayout="column">
+                <h2>{{weather.cityName}}</h2>
+                <h2>{{weather.forcasts[0].dayName | date: 'EEEE'}}</h2>
+                <h3>{{weather.forcasts[0].temperatureMin | degreePipe}}</h3>
+            </div>
+        </div>
+        <div class="right-side">
+            <i matTooltip="Remove from favorites" (click)="handleFavorites('Removed from favories.')"
+                *ngIf="weather.isFavorite" class="material-icons">
+                favorite
+            </i>
+            <i matTooltip="Add to favorites" (click)="handleFavorites('Added to favories.')" *ngIf="!weather.isFavorite"
+                class="material-icons">
+                favorite_border
+            </i>
+        </div>
+    </div>
+
+    <div class="middle-text">
+        <h2>{{weather.description}}</h2>
+    </div>
+
+    <div class="forecasts" fxLayout="row">
+        <mat-card *ngFor="let forecast of weather.forcasts" class="forecast" fxLayout="column">
+            <mat-card-header>
+                <mat-card-title>{{forecast.dayName | date: 'EEEE'}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content fxLayout="column">
+                <div class="day" fxLayout="column">
+                    <p>{{forecast.dayForcastPhrase}}</p>
+                    <img [src]="forecast.dayForcastIcon">
+                    <div class="degrees" fxLayout="row">
+                        <p class="min">{{forecast.temperatureMin | degreePipe}}</p>
+                        <p class="max">{{forecast.temperatureMax | degreePipe}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="forecasts-carousel">
+        <carousel-component [config]="forecastsCarouselConfig" [items]="weather.forcasts"></carousel-component>
+    </div>
+
+</div>

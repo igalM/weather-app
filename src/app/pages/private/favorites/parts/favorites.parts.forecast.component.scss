@@ -1,0 +1,25 @@
+.favorite {
+  margin: 0 5px;
+  .mat-card-title {
+    font-size: 16px;
+  }
+  .day {
+    align-items: center;
+    .degrees {
+      .min {
+        margin: 3px;
+        color: #aaa9a9;
+        p {
+          margin: 0;
+        }
+      }
+      .max {
+        margin: 3px;
+        color: #646363;
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

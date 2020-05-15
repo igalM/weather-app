@@ -1,0 +1,20 @@
+<div class="favorites-page">
+    <div *ngIf="(favoriteWeathers$ | async) as favorites" class="content-container" fxLayout="column">
+
+        <div *ngIf="favorites.length > 0" class="favorites-container" fxLayout="column">
+            <h1>Here are your saved weather forecasts!</h1>
+
+            <div class="favorites-block" fxLayout="row">
+                <div *ngFor="let fav of favorites" class="favorite-father">
+                    <favorites-parts-forecast-component [favoriteWeather]="fav"></favorites-parts-forecast-component>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="favorites.length == 0" class="empty">
+            <h1>You don't have any favorites saved yet!</h1>
+        </div>
+
+    </div>
+</div>

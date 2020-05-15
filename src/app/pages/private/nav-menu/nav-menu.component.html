@@ -1,0 +1,42 @@
+<div class="navbar">
+    <mat-toolbar color="primary">
+
+        <div class="hamburger-menu" fxShow="true" fxHide.gt-sm="true">
+            <button mat-icon-button (click)="toggleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+
+        <div class="navbar-items" fxLayout="row">
+            <a mat-button class="companyName" routerLink="/home">
+                <span>Herolo Weather Task</span>
+            </a>
+            <div class="toggles" fxLayout="column">
+                <div class="toggle-component">
+                    <toggle-component [name]="'degrees'" [text]="'Toggle Degrees'" (onChangeEmitter)="toggleDegree()">
+                    </toggle-component>
+                </div>
+                <div class="toggle-component">
+                    <toggle-component [name]="'theme'" [text]="'Toggle Theme'" (onChangeEmitter)="toggleTheme()">
+                    </toggle-component>
+                </div>
+            </div>
+            <div fxShow="true" fxHide.lt-md="true">
+                <a mat-button routerLink="/home">Home</a>
+                <a mat-button routerLink="/favorites">Favorites</a>
+            </div>
+        </div>
+
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill class="example-container"
+        [ngStyle]="{'z-index': sidenavIndex, 'pointer-events': pointerEvents}">
+        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" (openedStart)="sidenavOpened()"
+            (closed)="sidenavClosed()" opened="false" fxHide.gt-sm="true">
+            <div fxLayout="column">
+                <a (click)="toggleSidenav()" mat-button routerLink="/home">Home</a>
+                <a (click)="toggleSidenav()" mat-button routerLink="/favorites">Favorites</a>
+            </div>
+        </mat-sidenav>
+
+    </mat-sidenav-container>
+</div>

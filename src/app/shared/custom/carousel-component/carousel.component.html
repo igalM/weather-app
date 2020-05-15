@@ -1,0 +1,25 @@
+<ngu-carousel [inputs]="config" [dataSource]="items" class="forecasts">
+    <div *nguCarouselDef="let item;" class="item">
+        <mat-card fxLayout="column">
+            <mat-card-header>
+                <mat-card-title>{{item.dayName | date: 'EEEE'}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content fxLayout="column">
+                <div class="day" fxLayout="column">
+                    <p>{{item.dayForcastPhrase}}</p>
+                    <img [src]="item.dayForcastIcon">
+                    <div class="degrees" fxLayout="row">
+                        <p class="min">{{item.temperatureMin | degreePipe}}</p>
+                        <p class="max">{{item.temperatureMax | degreePipe}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <i NguCarouselPrev class="material-icons leftRs">
+        keyboard_arrow_left
+    </i>
+    <i NguCarouselNext class="material-icons rightRs">
+        keyboard_arrow_right
+    </i>
+</ngu-carousel>

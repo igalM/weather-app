@@ -1,0 +1,20 @@
+.navbar {
+  height: 100%;
+  mat-toolbar {
+    height: 100%;
+  }
+  .navbar-items {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.example-container {
+  position: fixed !important;
+  top: 76px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: unset !important;
+}

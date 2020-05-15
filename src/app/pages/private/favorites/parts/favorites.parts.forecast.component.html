@@ -1,0 +1,21 @@
+<div *ngIf="favoriteWeather" class="favorite" fxLayout="column">
+    <mat-card fxLayout="column">
+        <mat-card-header>
+            <mat-card-title>{{favoriteWeather.cityName}}</mat-card-title>
+            <mat-card-title>{{favoriteWeather.forcasts[0].dayName | date: 'EEEE'}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="day" fxLayout="column">
+                <p>{{favoriteWeather.forcasts[0].dayForcastPhrase}}</p>
+                <img [src]="favoriteWeather.forcasts[0].dayForcastIcon">
+                <div class="degrees" fxLayout="row">
+                    <p class="min">{{favoriteWeather.forcasts[0].temperatureMin | degreePipe}}</p>
+                    <p class="max">{{favoriteWeather.forcasts[0].temperatureMax | degreePipe}}</p>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" routerLink="/home" (click)="viewLocation()">View Location</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

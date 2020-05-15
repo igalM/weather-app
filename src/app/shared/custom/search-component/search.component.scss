@@ -1,0 +1,24 @@
+.search-box {
+  align-items: center;
+  margin-top: 40px;
+  .input-container {
+    position: relative;
+    border: 1px solid #434343;
+    border-radius: 5px;
+    height: 60px;
+    width: 400px;
+  }
+  .error-msg {
+    margin-top: 10px;
+  }
+  .button-container {
+    width: 170px;
+    height: 42px;
+    margin-top: 20px;
+  }
+  @media (max-width: 500px) {
+    .input-container {
+      width: 90%;
+    }
+  }
+}
