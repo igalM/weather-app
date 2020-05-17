@@ -1,16 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import * as fromApp from '../../../../store/index';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AutocompleteCity } from 'src/app/shared/models/autocomplete.city';
 import { addWeatherForecast } from 'src/store/actions/weather.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'search-component',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnDestroy {
   public regex = new RegExp('^[a-zA-Z ]+$');
   public showError: boolean = false;
 
@@ -19,19 +21,25 @@ export class SearchComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
 
   public filteredCities: AutocompleteCity[] = [];
+  private unsubscribe = new Subject();
 
   constructor(
     private readonly store: Store<fromApp.AppState>,
     private readonly _snackBar: MatSnackBar
   ) {
-    this.store.select(fromApp.selectAutocompleteCities)
+    this.store.pipe(
+      select(fromApp.selectAutocompleteCities),
+      takeUntil(this.unsubscribe)
+    )
       .subscribe(cities => {
         this.filteredCities = cities;
         return this.filteredCities;
       });
   }
 
-  ngOnInit(): void {
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   checkIfValid(query: string) {

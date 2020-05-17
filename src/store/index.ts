@@ -1,6 +1,7 @@
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, createSelector, select } from '@ngrx/store';
 import * as fromWeather from './reducers/weather.reducer';
 import * as fromSearch from './reducers/search.reducer';
+import { filter } from 'rxjs/operators';
 
 export interface AppState {
     weathers: fromWeather.State;
