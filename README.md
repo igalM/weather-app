@@ -1,4 +1,4 @@
-Website link - https://world-weather.azurewebsites.net/index
+Website link - https://my-weather-app-1.herokuapp.com
 
 # weather-app
 
