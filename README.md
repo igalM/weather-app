@@ -1,4 +1,4 @@
-Website link - https://my-weather-app-1.herokuapp.com
+Website link - http://world-weather.s3-website.eu-north-1.amazonaws.com
 
 # weather-app
 
