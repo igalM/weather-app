@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe)
     )
       .subscribe(weather => {
-        debugger;
         this.currentWeather = weather
       })
   }

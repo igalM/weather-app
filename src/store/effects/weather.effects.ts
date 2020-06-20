@@ -11,26 +11,22 @@ export class WeatherEffects {
     addWeatherForecast$ = createEffect(() =>
         this.actions$.pipe(
             ofType(WeatherActions.addWeatherForecast),
-            switchMap(({ city }) => {
-                return this.weatherService.getWeatherForecast(city)
-                    .pipe(
-                        map(weather => WeatherActions.addWeatherForecastSuccess({ currentWeather: weather })),
-                        catchError(() => of(WeatherActions.addWeatherForecastFailure()))
-                    )
-            })
+            switchMap(({ city }) => this.weatherService.getWeatherForecast(city).pipe(
+                map(weather => WeatherActions.addWeatherForecastSuccess({ currentWeather: weather })),
+                catchError(() => of(WeatherActions.addWeatherForecastFailure()))
+            )
+            )
         )
     );
 
     getDefaultWeather$ = createEffect(() =>
         this.actions$.pipe(
             ofType(WeatherActions.getDefaultWeather),
-            switchMap(() => {
-                return this.weatherService.getGeolocation()
-                    .pipe(
-                        map(city => WeatherActions.addWeatherForecast({ city: city })),
-                        catchError(() => of(WeatherActions.addWeatherForecastFailure()))
-                    )
-            })
+            switchMap(() => this.weatherService.getGeolocation().pipe(
+                map(city => WeatherActions.addWeatherForecast({ city: city })),
+                catchError(() => of(WeatherActions.addWeatherForecastFailure()))
+            )
+            )
         )
     );
 

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { of, asyncScheduler } from 'rxjs';
-import { debounceTime, switchMap, skip, takeUntil, map, catchError } from 'rxjs/operators';
+import { debounceTime, switchMap, map, catchError } from 'rxjs/operators';
 import { AutocompleteCity } from 'src/app/shared/models/autocomplete.city';
 import { WeatherService } from 'src/app/shared/services/weather.service';
 import { SearchActions } from '../actions/actions';
@@ -14,19 +14,10 @@ export class SearchEffects {
             this.actions$.pipe(
                 ofType(SearchActions.searchCities),
                 debounceTime(debounce, scheduler),
-                switchMap(({ query }) => {
-                    
-                    const nextSearch$ = this.actions$.pipe(
-                        ofType(SearchActions.searchCities),
-                        skip(1)
-                    );
-
-                    return this.weatherService.searchCities(query)
-                        .pipe(
-                            takeUntil(nextSearch$),
-                            map((cities: AutocompleteCity[]) => SearchActions.searchCitiesSuccess({ cities: cities })),
-                            catchError(() => of(SearchActions.searchCitiesFailure({ cities: [] }))))
-                })
+                switchMap(({ query }) => this.weatherService.searchCities(query).pipe(
+                    map((cities: AutocompleteCity[]) => SearchActions.searchCitiesSuccess({ cities: cities })),
+                    catchError(() => of(SearchActions.searchCitiesFailure({ cities: [] }))))
+                )
             )
     );
 
